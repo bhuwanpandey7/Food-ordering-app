@@ -1,17 +1,17 @@
-import { createRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Input from '../../UI/Input';
 import classes from './MealItemForm.module.css';
 
-const inputRef = createRef();
-
 const MealItemForm = props => {
+
+    const inputRef = useRef();
 
     const [isInvalid, setIsInvalid] = useState(null);
 
     const submitHandler = (event) => {
         event.preventDefault();
         const value = inputRef.current.value;
-        if (!value || value < 1 || value > 5) {
+        if (value < 1 || value > 5) {
             setIsInvalid(true);
             return;
         }
@@ -30,13 +30,16 @@ const MealItemForm = props => {
                     type: 'number',
                     inputMode: 'numeric',
                     min: 1,
-                    max: 10,
+                    max: 5,
                     defaultValue: 1,
                     step: 1
                 }}
         />
         <button>+ Add</button>
-        {!isInvalid && 'Enter valid value between 1-5'}
+        {
+            isInvalid &&
+            <small style={{ color: 'red' }}>{'Enter valid value between 1-5'}</small>
+        }
     </form>
 }
 

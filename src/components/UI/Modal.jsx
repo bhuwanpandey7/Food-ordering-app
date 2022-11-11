@@ -5,7 +5,7 @@ import classes from './Modal.module.css';
 const Backdrop = props => <div onClick={props.onClick} className={classes.backdrop}></div>
 
 const ModalOverlay = props => {
-    return <div onClick={props.onClick} className={classes.modal}>
+    return <div className={classes.modal}>
         <div className={classes.content}>{props.children}</div>
     </div>
 }
